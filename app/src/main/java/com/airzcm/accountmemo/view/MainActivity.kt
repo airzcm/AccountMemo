@@ -1,14 +1,17 @@
 package com.airzcm.accountmemo.view
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
+import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.airzcm.accountmemo.R
+import com.airzcm.accountmemo.model.database.AccountDatabase
+import com.airzcm.accountmemo.model.entity.Event
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -30,6 +33,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val db = AccountDatabase.getInstance(this)
+        if (db.getEventDao().getAllEvent().isEmpty()) {
+            val event = Event(category = "吃", event = "早饭")
+            db.getEventDao().insertEvent(event)
+        }
+        Log.i("aaaaa", db.getEventDao().getEvent(1).toString())
     }
 
     override fun onBackPressed() {
