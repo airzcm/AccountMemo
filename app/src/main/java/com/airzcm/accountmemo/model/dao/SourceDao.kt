@@ -13,14 +13,14 @@ import com.airzcm.accountmemo.model.entity.Source
 interface SourceDao {
 
     @Insert
-    fun insertEvent(source: Source)
+    fun insertSource(source: Source)
 
     @Update
-    fun updateEvent(source: Source)
+    fun updateSource(source: Source)
 
     @Query("SELECT * from source")
-    fun getAllEvent(): List<Source>
+    fun getAllSource(): List<Source>
 
     @Query("SELECT * from source WHERE id = (:value)")
-    fun getEvent(value: Int): List<Source>
+    fun getSource(value: Int): List<Source>
 }

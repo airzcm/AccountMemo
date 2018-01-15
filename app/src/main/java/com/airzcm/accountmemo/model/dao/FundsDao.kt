@@ -2,7 +2,6 @@ package com.airzcm.accountmemo.model.dao
 
 import android.arch.persistence.room.*
 import com.airzcm.accountmemo.model.entity.Funds
-import com.airzcm.accountmemo.model.entity.Source
 
 /**
  * @author airzcm on 2018/1/5.
@@ -25,7 +24,7 @@ interface FundsDao {
     @Query("SELECT * from funds WHERE id = (:value)")
     fun getEvent(value: Int): List<Funds>
 
-    @Query("SELECT * from funds WHERE date = (:value)")
+    @Query("SELECT * from funds WHERE day = (:value)")
     fun getDayFunds(value: String): List<Funds>
 
     @Query("SELECT * from funds WHERE month = (:value)")
