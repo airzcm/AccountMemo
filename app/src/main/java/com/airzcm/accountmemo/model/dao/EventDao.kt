@@ -18,6 +18,6 @@ interface EventDao {
     @Query("SELECT * from event")
     fun getAllEvent(): List<Event>
 
-    @Query("SELECT * from event WHERE id = (:value)")
+    @Query("SELECT * from event WHERE categoryId = (:value)")
     fun getEvent(value: Int): List<Event>
 }

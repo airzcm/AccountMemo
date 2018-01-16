@@ -12,5 +12,5 @@ import android.arch.persistence.room.PrimaryKey
 data class Source(
         @PrimaryKey(autoGenerate = true)
         var id: Int = 0,
-        var category: String
+        var source: String
 )

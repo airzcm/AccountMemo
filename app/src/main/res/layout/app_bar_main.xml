@@ -22,12 +22,71 @@
 
     <include layout="@layout/content_main" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <View
+        android:id="@+id/fabBGLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#90FFFFFF"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/fabLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_create" />
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:padding="24dp"
+        android:visibility="gone"
+        app:layout_behavior="com.airzcm.accountmemo.view.util.MoveUpwardBehavior">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_income" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_arrow_down" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:padding="@dimen/fab_margin"
+        app:layout_behavior="com.airzcm.accountmemo.view.util.MoveUpwardBehavior">
+
+        <TextView
+            android:id="@+id/fab_expense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_expense"
+            android:visibility="gone" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_add" />
+    </LinearLayout>
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/fab"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom|end"-->
+    <!--android:layout_margin="@dimen/fab_margin"-->
+    <!--app:srcCompat="@drawable/ic_create" />-->
 
 </android.support.design.widget.CoordinatorLayout>

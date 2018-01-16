@@ -10,8 +10,12 @@
         android:id="@+id/et_value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
+        android:hint="金额"
         android:imeOptions="actionDone"
+        android:inputType="numberDecimal"
+        android:layout_marginEnd="12dp"
+        android:background="@android:color/transparent"
+        android:textAlignment="textEnd"
         android:textSize="32sp"
         app:decimalNumber="2" />
 
@@ -19,40 +23,82 @@
         android:id="@+id/tv_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:textSize="20sp"
+        android:layout_marginEnd="20dp"
+        android:hint="日期"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:id="@+id/layout_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_category"/>
 
     <Spinner
         android:id="@+id/sp_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+        android:textAlignment="center" />
+    </LinearLayout>
 
-    <Spinner
-        android:id="@+id/sp_event"
+    <LinearLayout
+        android:id="@+id/layout_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_event"/>
 
-    <Spinner
-        android:id="@+id/sp_source"
+        <Spinner
+            android:id="@+id/sp_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_source"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_source"/>
 
-    <EditText
-        android:id="@+id/et_comment"
+        <Spinner
+            android:id="@+id/sp_source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="@android:color/darker_gray"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:maxLength="140"
-        android:maxLines="5" />
+        android:minHeight="126dp">
 
-    <Button
-        android:id="@+id/btn_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="save" />
+        <EditText
+            android:id="@+id/et_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@android:color/darker_gray"
+            android:hint="备注"
+            android:maxLines="5"
+            android:padding="4dp" />
+    </LinearLayout>
 
 </LinearLayout>
