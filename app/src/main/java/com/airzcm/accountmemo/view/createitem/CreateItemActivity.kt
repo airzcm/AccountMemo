@@ -12,8 +12,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import com.airzcm.accountmemo.App
 import com.airzcm.accountmemo.R
-import com.airzcm.accountmemo.model.database.AccountDatabase
 import com.airzcm.accountmemo.model.entity.Expense
 import com.airzcm.accountmemo.model.entity.Income
 import com.airzcm.accountmemo.util.toast
@@ -35,7 +35,7 @@ class CreateItemActivity : AppCompatActivity() {
     private var eventId: Int = 0
     private var sourceId: Int = 0
 
-    val db = AccountDatabase.getInstance(this)
+    val db = App.database
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
+import com.airzcm.accountmemo.App
 import com.airzcm.accountmemo.R
 import com.airzcm.accountmemo.model.database.AccountDatabase
 import com.airzcm.accountmemo.model.entity.Category
@@ -81,7 +82,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun initDatabase() {
-        db = AccountDatabase.getInstance(this)
+        db = App.database
+//        db = AccountDatabase.getInstance(this)
         if (db.getCategoryDao().getAllCategory().isEmpty()) {
             val category0 = Category(category = "吃")
             val category1 = Category(category = "穿")
