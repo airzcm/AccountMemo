@@ -31,13 +31,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             if (!isFABOpen) {
                 showFABMenu()
             } else {
-                CreateItemActivity.startMe(this@MainActivity, false)
+                CreateItemActivity.startMe(this@MainActivity, 0)
                 closeFABMenu()
             }
         }
 
         fab1.setOnClickListener {
-            CreateItemActivity.startMe(this@MainActivity, true)
+            CreateItemActivity.startMe(this@MainActivity, 1)
             closeFABMenu()
         }
 

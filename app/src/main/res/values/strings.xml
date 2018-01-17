@@ -13,4 +13,6 @@
     <string name="select_category">类别</string>
     <string name="select_event">项目</string>
     <string name="select_source">来源</string>
+
+    <string name="text_date"> %1$d-%2$d-%3$d</string>
 </resources>

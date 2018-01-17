@@ -8,8 +8,7 @@ import android.arch.persistence.room.PrimaryKey
 /**
  * @author airzcm on 2018/1/11.
  */
-@Entity(tableName = "event",
-        indices = [(Index("categoryId"))],
+@Entity(indices = [(Index("categoryId"))],
         foreignKeys = [(ForeignKey(entity = Category::class, parentColumns = arrayOf("id"), childColumns = arrayOf("categoryId")))])
 data class Event(
         @PrimaryKey(autoGenerate = true)

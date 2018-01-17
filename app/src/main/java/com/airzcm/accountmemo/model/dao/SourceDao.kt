@@ -18,9 +18,9 @@ interface SourceDao {
     @Update
     fun updateSource(source: Source)
 
-    @Query("SELECT * from source")
+    @Query("SELECT * from Source")
     fun getAllSource(): List<Source>
 
-    @Query("SELECT * from source WHERE id = (:value)")
+    @Query("SELECT * from Source WHERE id = (:value)")
     fun getSource(value: Int): List<Source>
 }

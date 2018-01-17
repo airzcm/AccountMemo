@@ -1,6 +1,9 @@
 package com.airzcm.accountmemo.model.dao
 
-import android.arch.persistence.room.*
+import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.Query
+import android.arch.persistence.room.Update
 import com.airzcm.accountmemo.model.entity.Event
 
 /**
@@ -15,9 +18,9 @@ interface EventDao {
     @Update
     fun updateEvent(event: Event)
 
-    @Query("SELECT * from event")
+    @Query("SELECT * from Event")
     fun getAllEvent(): List<Event>
 
-    @Query("SELECT * from event WHERE categoryId = (:value)")
+    @Query("SELECT * from Event WHERE categoryId = (:value)")
     fun getEvent(value: Int): List<Event>
 }

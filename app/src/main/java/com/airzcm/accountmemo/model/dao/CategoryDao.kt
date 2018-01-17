@@ -1,8 +1,10 @@
 package com.airzcm.accountmemo.model.dao
 
-import android.arch.persistence.room.*
+import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.Query
+import android.arch.persistence.room.Update
 import com.airzcm.accountmemo.model.entity.Category
-import com.airzcm.accountmemo.model.entity.Event
 
 /**
  * @author airzcm on 2018/1/11.
@@ -16,9 +18,9 @@ interface CategoryDao {
     @Update
     fun updateCategory(category: Category)
 
-    @Query("SELECT * from category")
+    @Query("SELECT * from Category")
     fun getAllCategory(): List<Category>
 
-    @Query("SELECT * from category WHERE id = (:value)")
+    @Query("SELECT * from Category WHERE id = (:value)")
     fun getCategory(value: Int): List<Category>
 }

@@ -14,9 +14,8 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import com.airzcm.accountmemo.R
 import com.airzcm.accountmemo.model.database.AccountDatabase
-import com.airzcm.accountmemo.model.entity.Category
-import com.airzcm.accountmemo.model.entity.Event
-import com.airzcm.accountmemo.model.entity.Source
+import com.airzcm.accountmemo.model.entity.Expense
+import com.airzcm.accountmemo.model.entity.Income
 import com.airzcm.accountmemo.view.util.toast
 import kotlinx.android.synthetic.main.activity_create_new.*
 import java.util.*
@@ -26,13 +25,15 @@ import java.util.*
  */
 class CreateItemActivity : AppCompatActivity() {
 
+    private var type: Int = 0
+
     private var year: Int = 0
     private var month: Int = 0
     private var day: Int = 0
 
-    private lateinit var category: Category
-    private lateinit var event: Event
-    private lateinit var source: Source
+    private var categoryId: Int = 0
+    private var eventId: Int = 0
+    private var sourceId: Int = 0
 
     val db = AccountDatabase.getInstance(this)
 
@@ -40,8 +41,8 @@ class CreateItemActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_new)
 
-        val isIncome = intent.getBooleanExtra(ACCOUNT_TYPE, false)
-        if (isIncome) {
+        type = intent.getIntExtra(ACCOUNT_TYPE, 0)
+        if (type == 1) {
             layout_category.visibility = View.GONE
             layout_event.visibility = View.GONE
             layout_source.visibility = View.VISIBLE
@@ -55,6 +56,7 @@ class CreateItemActivity : AppCompatActivity() {
         year = calendar.get(Calendar.YEAR)
         month = calendar.get(Calendar.MONTH)
         day = calendar.get(Calendar.DAY_OF_MONTH)
+        tv_date.text = resources.getString(R.string.text_date, year, month + 1, day)
 
         selectCategory()
         selectSource()
@@ -70,9 +72,12 @@ class CreateItemActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.action_save -> {
+                saveItem()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -80,10 +85,10 @@ class CreateItemActivity : AppCompatActivity() {
     private fun showDatePickerDialog() {
         DatePickerDialog(this@CreateItemActivity,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                    tv_date.text = year.toString() + "-" + (month + 1) + "-" + dayOfMonth
+                    tv_date.text = resources.getString(R.string.text_date, year, month + 1, dayOfMonth)
                     this.year = year
                     this.month = month
-                    this.day = day
+                    this.day = dayOfMonth
                 },
                 year, month, day).show()
     }
@@ -100,8 +105,9 @@ class CreateItemActivity : AppCompatActivity() {
                 if (position == categoryList.size) {
                     Log.i("aaaaa", position.toString())
                 } else {
-                    category = categoryList[position]
-                    selectEvent(category.id)
+                    categoryId = categoryList[position].id
+                    Log.i("aaaaacategory", categoryId.toString())
+                    selectEvent(categoryId)
                 }
             }
 
@@ -123,7 +129,8 @@ class CreateItemActivity : AppCompatActivity() {
                 if (position == eventList.size) {
                     Log.i("aaaaa", position.toString())
                 } else {
-                    event = eventList[position]
+                    eventId = eventList[position].id
+                    Log.i("aaaaaevent", eventId.toString())
                 }
             }
 
@@ -145,7 +152,8 @@ class CreateItemActivity : AppCompatActivity() {
                 if (position == sourceList.size) {
                     Log.i("aaaaa", position.toString())
                 } else {
-                    source = sourceList[position]
+                    sourceId = sourceList[position].id
+                    Log.i("aaaaasource", sourceId.toString())
                 }
             }
 
@@ -155,12 +163,30 @@ class CreateItemActivity : AppCompatActivity() {
         }
     }
 
+    private fun saveItem() {
+        val amount = et_value.text.toString()
+        val comment = et_comment.text.toString()
+        if (amount.isEmpty()) {
+            toast("请输入金额")
+        } else {
+            if (type == 1) {
+                val income = Income(amount = amount.toDouble(), day = day, month = month + 1, year = year, sourceId = sourceId, comment = comment)
+                db.getIncomeDao().insertIncome(income)
+            } else {
+                val expense = Expense(amount = amount.toDouble(), day = day, month = month + 1, year = year, eventId = eventId, comment = comment)
+                db.getExpenseDao().insertExpense(expense)
+            }
+            finish()
+        }
+    }
+
     companion object {
         private val ACCOUNT_TYPE = "ACCOUNT_TYPE"
 
-        fun startMe(context: Context, isIncome: Boolean = false) {
+        //        0 for expense, 1 for income
+        fun startMe(context: Context, type: Int = 0) {
             val intent = Intent(context, CreateItemActivity::class.java)
-            intent.putExtra(ACCOUNT_TYPE, isIncome)
+            intent.putExtra(ACCOUNT_TYPE, type)
 
             context.startActivity(intent)
         }
