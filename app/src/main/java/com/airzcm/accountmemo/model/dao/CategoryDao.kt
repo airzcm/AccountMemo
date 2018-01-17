@@ -13,7 +13,7 @@ import com.airzcm.accountmemo.model.entity.Category
 interface CategoryDao {
 
     @Insert
-    fun insertCategory(category: Category)
+    fun insertCategory(vararg category: Category)
 
     @Update
     fun updateCategory(category: Category)

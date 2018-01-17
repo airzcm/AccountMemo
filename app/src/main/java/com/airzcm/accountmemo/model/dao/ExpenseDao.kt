@@ -10,7 +10,7 @@ import com.airzcm.accountmemo.model.entity.Expense
 interface ExpenseDao {
 
     @Insert
-    fun insertExpense(expense: Expense)
+    fun insertExpense(vararg expense: Expense)
 
     @Delete
     fun deleteExpense(expense: Expense)

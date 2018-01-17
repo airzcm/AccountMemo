@@ -10,7 +10,7 @@ import com.airzcm.accountmemo.model.entity.Income
 interface IncomeDao {
 
     @Insert
-    fun insertIncome(income: Income)
+    fun insertIncome(vararg income: Income)
 
     @Delete
     fun deleteIncome(income: Income)

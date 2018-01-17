@@ -1,4 +1,4 @@
-package com.airzcm.accountmemo.view.util;
+package com.airzcm.accountmemo.util;
 
 import android.content.Context;
 import android.view.View;

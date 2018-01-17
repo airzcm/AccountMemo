@@ -13,7 +13,7 @@ import com.airzcm.accountmemo.model.entity.Event
 interface EventDao {
 
     @Insert
-    fun insertEvent(event: Event)
+    fun insertEvent(vararg event: Event)
 
     @Update
     fun updateEvent(event: Event)

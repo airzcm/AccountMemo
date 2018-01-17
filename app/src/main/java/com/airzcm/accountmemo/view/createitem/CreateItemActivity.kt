@@ -16,7 +16,7 @@ import com.airzcm.accountmemo.R
 import com.airzcm.accountmemo.model.database.AccountDatabase
 import com.airzcm.accountmemo.model.entity.Expense
 import com.airzcm.accountmemo.model.entity.Income
-import com.airzcm.accountmemo.view.util.toast
+import com.airzcm.accountmemo.util.toast
 import kotlinx.android.synthetic.main.activity_create_new.*
 import java.util.*
 

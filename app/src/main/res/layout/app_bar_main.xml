@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.airzcm.accountmemo.view.MainActivity">
+    tools:context="com.airzcm.accountmemo.view.home.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         android:gravity="center_vertical"
         android:padding="24dp"
         android:visibility="gone"
-        app:layout_behavior="com.airzcm.accountmemo.view.util.MoveUpwardBehavior">
+        app:layout_behavior="com.airzcm.accountmemo.util.MoveUpwardBehavior">
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
         android:clipToPadding="false"
         android:gravity="center_vertical"
         android:padding="@dimen/fab_margin"
-        app:layout_behavior="com.airzcm.accountmemo.view.util.MoveUpwardBehavior">
+        app:layout_behavior="com.airzcm.accountmemo.util.MoveUpwardBehavior">
 
         <TextView
             android:id="@+id/fab_expense"

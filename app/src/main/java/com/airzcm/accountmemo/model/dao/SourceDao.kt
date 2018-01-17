@@ -13,7 +13,7 @@ import com.airzcm.accountmemo.model.entity.Source
 interface SourceDao {
 
     @Insert
-    fun insertSource(source: Source)
+    fun insertSource(vararg source: Source)
 
     @Update
     fun updateSource(source: Source)
