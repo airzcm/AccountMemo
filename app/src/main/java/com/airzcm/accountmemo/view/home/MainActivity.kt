@@ -1,15 +1,14 @@
 package com.airzcm.accountmemo.view.home
 
 import android.animation.Animator
-import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import com.airzcm.accountmemo.App
 import com.airzcm.accountmemo.R
+import com.airzcm.accountmemo.base.BaseActivity
 import com.airzcm.accountmemo.model.database.AccountDatabase
 import com.airzcm.accountmemo.model.entity.Category
 import com.airzcm.accountmemo.model.entity.Event
@@ -20,19 +19,14 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var isFABOpen = false
 
     private lateinit var db: AccountDatabase
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
-
-        initView()
-        initDatabase()
+    override fun layout(): Int {
+        return R.layout.activity_main
     }
 
     override fun onBackPressed() {
@@ -43,7 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun initView() {
+    override fun initView() {
 //        floating action button
         fab.setOnClickListener { view ->
             if (!isFABOpen) {
@@ -81,7 +75,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun initDatabase() {
+    override fun initDatabase() {
         db = App.database
 //        db = AccountDatabase.getInstance(this)
         if (db.getCategoryDao().getAllCategory().isEmpty()) {

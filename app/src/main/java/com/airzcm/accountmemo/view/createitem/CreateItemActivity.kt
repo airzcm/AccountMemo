@@ -3,8 +3,6 @@ package com.airzcm.accountmemo.view.createitem
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -14,6 +12,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import com.airzcm.accountmemo.App
 import com.airzcm.accountmemo.R
+import com.airzcm.accountmemo.base.BaseActivity
 import com.airzcm.accountmemo.model.entity.Expense
 import com.airzcm.accountmemo.model.entity.Income
 import com.airzcm.accountmemo.util.toast
@@ -23,7 +22,7 @@ import java.util.*
 /**
  * @author airzcm on 2018/1/15.
  */
-class CreateItemActivity : AppCompatActivity() {
+class CreateItemActivity : BaseActivity() {
 
     private var type: Int = 0
 
@@ -37,10 +36,9 @@ class CreateItemActivity : AppCompatActivity() {
 
     val db = App.database
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_new)
+    override fun layout() = R.layout.activity_create_new
 
+    override fun initView() {
         type = intent.getIntExtra(ACCOUNT_TYPE, 0)
         if (type == 1) {
             layout_category.visibility = View.GONE
