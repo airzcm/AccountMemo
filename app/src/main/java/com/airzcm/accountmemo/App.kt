@@ -1,8 +1,10 @@
 package com.airzcm.accountmemo
 
 import android.app.Application
-import android.arch.persistence.room.Room
-import com.airzcm.accountmemo.model.database.AccountDatabase
+import android.content.Context
+import com.airzcm.accountmemo.di.component.AppComponent
+import com.airzcm.accountmemo.di.component.DaggerAppComponent
+import com.airzcm.accountmemo.di.module.AppModule
 import com.facebook.stetho.Stetho
 
 /**
@@ -10,23 +12,22 @@ import com.facebook.stetho.Stetho
  */
 class App : Application() {
 
+    lateinit var appComponent: AppComponent
+
     override fun onCreate() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
 
-        database = Room.databaseBuilder(applicationContext,
-                AccountDatabase::class.java, "Account.db")
-                .allowMainThreadQueries()
+        appComponent = DaggerAppComponent.builder()
+                .appModule(AppModule(this))
                 .build()
     }
 
-    override fun onTerminate() {
-        super.onTerminate()
-        database.close()
-    }
-
     companion object {
-        lateinit var database: AccountDatabase
+        //        lateinit var database: AccountDatabase
+        operator fun get(context: Context): App {
+            return context.applicationContext as App
+        }
     }
 
 }

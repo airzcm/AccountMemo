@@ -35,6 +35,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
+//    dagger2
+    compile 'com.google.dagger:dagger:2.14.1'
+    kapt 'com.google.dagger:dagger-compiler:2.14.1'
+
 //    ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:1.1.0"
 

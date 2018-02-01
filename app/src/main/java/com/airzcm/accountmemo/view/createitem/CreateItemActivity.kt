@@ -13,11 +13,14 @@ import android.widget.ArrayAdapter
 import com.airzcm.accountmemo.App
 import com.airzcm.accountmemo.R
 import com.airzcm.accountmemo.base.BaseActivity
+import com.airzcm.accountmemo.di.module.ActivityModule
+import com.airzcm.accountmemo.model.database.AccountDatabase
 import com.airzcm.accountmemo.model.entity.Expense
 import com.airzcm.accountmemo.model.entity.Income
 import com.airzcm.accountmemo.util.toast
 import kotlinx.android.synthetic.main.activity_create_new.*
 import java.util.*
+import javax.inject.Inject
 
 /**
  * @author airzcm on 2018/1/15.
@@ -34,11 +37,17 @@ class CreateItemActivity : BaseActivity() {
     private var eventId: Int = 0
     private var sourceId: Int = 0
 
-    val db = App.database
+    @Inject
+    lateinit var db: AccountDatabase
 
     override fun layout() = R.layout.activity_create_new
 
+    override fun setupActivityComponent() {
+        App[this].appComponent.plus(ActivityModule(this)).inject(this)
+    }
+
     override fun initView() {
+
         type = intent.getIntExtra(ACCOUNT_TYPE, 0)
         if (type == 1) {
             layout_category.visibility = View.GONE

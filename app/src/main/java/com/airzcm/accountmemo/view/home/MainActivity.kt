@@ -9,6 +9,7 @@ import android.view.View
 import com.airzcm.accountmemo.App
 import com.airzcm.accountmemo.R
 import com.airzcm.accountmemo.base.BaseActivity
+import com.airzcm.accountmemo.di.module.ActivityModule
 import com.airzcm.accountmemo.model.database.AccountDatabase
 import com.airzcm.accountmemo.model.entity.Category
 import com.airzcm.accountmemo.model.entity.Event
@@ -17,13 +18,15 @@ import com.airzcm.accountmemo.view.createitem.CreateItemActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import javax.inject.Inject
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var isFABOpen = false
 
-    private lateinit var db: AccountDatabase
+    @Inject
+    lateinit var db: AccountDatabase
 
     override fun layout(): Int {
         return R.layout.activity_main
@@ -37,7 +40,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
+    override fun setupActivityComponent() {
+        App[this].appComponent.plus(ActivityModule(this)).inject(this)
+    }
+
     override fun initView() {
+
 //        floating action button
         fab.setOnClickListener { view ->
             if (!isFABOpen) {
@@ -76,8 +84,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     override fun initDatabase() {
-        db = App.database
-//        db = AccountDatabase.getInstance(this)
         if (db.getCategoryDao().getAllCategory().isEmpty()) {
             val category0 = Category(category = "吃")
             val category1 = Category(category = "穿")
@@ -163,7 +169,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_day -> {
-                // Handle the camera action
             }
             R.id.nav_month -> {
 

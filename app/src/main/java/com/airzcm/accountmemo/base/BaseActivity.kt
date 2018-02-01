@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.app_bar_main.*
 
 /**
  * @author airzcm on 2018/1/17.
@@ -14,11 +13,14 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout())
-        setSupportActionBar(toolbar)
+
+        setupActivityComponent()
 
         initView()
         initDatabase()
     }
+
+    protected abstract fun setupActivityComponent()
 
     @LayoutRes
     abstract fun layout(): Int
